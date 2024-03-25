@@ -81,7 +81,10 @@ flutter:
         - asset: assets\fonts\Nunito\Nunito-Light.ttf
         - asset: assets\fonts\Nunito\Nunito-Regular.ttf
         - asset: assets\fonts\Nunito\Nunito-SemiBold.ttf
-
+    - family: Tinos
+      fonts:
+        - asset: assets\fonts\Tinos\Tinos-Bold.ttf
+        - asset: assets\fonts\Tinos\Tinos-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
