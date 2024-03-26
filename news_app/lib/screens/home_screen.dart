@@ -172,11 +172,11 @@ class homescreen extends StatelessWidget {
             Expanded(
                 child: ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: 6, // number of articles
+              itemCount: 3, // number of articles
               itemBuilder: (context, index) {
                 return new_summary(
                   "Article Title ${index + 1}",
-                  "assets/news_image.png",
+                  "assets/dummy_image/${index + 1}.png",
                   "Article summary...",
                   _screenSize,
                 );

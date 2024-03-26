@@ -23,7 +23,7 @@ class notificationscreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => homescreen()),
                   );
                 },
-                child: Icon(Icons.arrow_back_outlined)),
+                child: Icon(Icons.arrow_back)),
             SizedBox(
               width: 100,
             ),
@@ -137,10 +137,7 @@ class notificationscreen extends StatelessWidget {
                 fontWeight: FontWeight.normal,
               ),
               children: [
-                TextSpan(
-                  text:
-                      "A World Health Organization official said Monday it is reclassifying the highly contagious triple-mutant Covid variant spreading in India as a 'variant of concern,' indicating that it’s become a...",
-                ),
+                TextSpan(text: first_paragraph),
                 TextSpan(
                   text: ' Read More',
                   style: TextStyle(
