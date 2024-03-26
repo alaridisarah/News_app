@@ -12,15 +12,16 @@ class homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: bottomnav(
-        index: 0,
-      ),
-      extendBodyBehindAppBar: true,
+      // bottomNavigationBar: bottomnav(
+      // //   index: 0,
+      // // ),
+      // extendBodyBehindAppBar: true,
       body: SafeArea(
-        child: Stack(children: [
+        maintainBottomViewPadding: true,
+        child: Stack(alignment: AlignmentDirectional.bottomEnd, children: [
           Column(children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(10.0),
               child: Flexible(
                 child: Row(
                   children: [
@@ -61,7 +62,8 @@ class homescreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding:
+                  const EdgeInsets.only(left: 10, right: 10, bottom: 8, top: 8),
               child: Column(
                 children: [
                   Row(
@@ -73,7 +75,7 @@ class homescreen extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(width: _screenSize.width * 0.45),
+                      SizedBox(width: _screenSize.width * 0.50),
                       Row(
                         children: [
                           TextButton(
@@ -98,8 +100,6 @@ class homescreen extends StatelessWidget {
                 ],
               ),
             ),
-            // widget(
-            //   child:
             SizedBox(
               height: 250.0,
               child: ListView.builder(
@@ -109,17 +109,17 @@ class homescreen extends StatelessWidget {
                 itemCount: 3, // number of articles,
                 itemBuilder: (context, index) {
                   List articles = [
-                    new_summary(
+                    Lastnews_summary(
                         "Crypto investors should be prepared to lose all their money, BOE governor says",
                         "assets/news_image.png",
                         "“I’m going to say this very bluntly again,” he added. “Buy them only if you’re prepared to lose all your money.”",
                         _screenSize),
-                    new_summary(
+                    Lastnews_summary(
                         "Crypto investors should be prepared to lose all their money, BOE governor says",
                         "assets/news_image.png",
                         "“I’m going to say this very bluntly again,” he added. “Buy them only if you’re prepared to lose all your money.”",
                         _screenSize),
-                    new_summary(
+                    Lastnews_summary(
                         "Crypto investors should be prepared to lose all their money, BOE governor says",
                         "assets/news_image.png",
                         "“I’m going to say this very bluntly again,” he added. “Buy them only if you’re prepared to lose all your money.”",
@@ -132,18 +132,18 @@ class homescreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             SizedBox(
-              height: 40,
+              height: 30,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 6, // number of category,
                 itemBuilder: (context, index) {
                   List category = [
-                    category_news("Health"),
-                    category_news("Art"),
-                    category_news("Sport"),
-                    category_news("Technology"),
-                    category_news("Science"),
-                    category_news("Lifestyle"),
+                    category_news("Health", index),
+                    category_news("Art", index),
+                    category_news("Sport", index),
+                    category_news("Technology", index),
+                    category_news("Science", index),
+                    category_news("Lifestyle", index),
                   ];
 
                   return category[index];
@@ -151,54 +151,34 @@ class homescreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            SizedBox(
-              height: 210,
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: 6, // number of category,
-                itemBuilder: (context, index) {
-                  List articles = [
-                    new_summary(
-                        "fvlwjebf;owefio;weio;wrgwegwgwegwe",
-                        "assets/news_image.png",
-                        "“fewpise all your money.”",
-                        _screenSize),
-                    new_summary("Crypto inrnor says", "assets/news_image.png",
-                        "“I’m go prepared to loseyour money.”", _screenSize),
-                    new_summary(
-                        "Crypto investors should be preparedr says",
-                        "assets/news_image.png",
-                        "“I’m going to say prepared to lomoney.”",
-                        _screenSize),
-                    new_summary(
-                        "Crypto investors should be preparedr says",
-                        "assets/news_image.png",
-                        "“I’m going to say prepared to lomoney.”",
-                        _screenSize),
-                    new_summary(
-                        "Crypto investors should be preparedr says",
-                        "assets/news_image.png",
-                        "“I’m going to say prepared to lomoney.”",
-                        _screenSize)
-                  ];
-
-                  return articles[index];
-                },
-              ),
-            ),
+            Expanded(
+                child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: 6, // number of articles
+              itemBuilder: (context, index) {
+                return new_summary(
+                  "Article Title ${index + 1}",
+                  "assets/news_image.png",
+                  "Article summary...",
+                  _screenSize,
+                );
+              },
+            ))
+            // Add more widgets as needed
           ]),
+          Nav_bar(_screenSize)
         ]),
       ),
     );
   }
 
-  Widget new_summary(
+  Widget Lastnews_summary(
       String title, String new_image, String subtitle, var screen) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Container(
         height: 150,
-        width: screen.width * 0.55,
+        width: screen.width * 0.75,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
@@ -208,11 +188,10 @@ class homescreen extends StatelessWidget {
         child: Stack(children: [
           //Image.asset(new_image, fit: BoxFit.cover),
           Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 title,
-                textAlign: TextAlign.left,
                 style: TextStyle(fontSize: 12, color: Colors.white),
               ),
               SizedBox(
@@ -228,24 +207,170 @@ class homescreen extends StatelessWidget {
     );
   }
 
-  Widget category_news(String catrgory) {
+  Widget new_summary(
+      String title, String new_image, String subtitle, var screen) {
     return Padding(
-      padding: const EdgeInsets.only(right: 15),
-      child: Container(
-          padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5.0),
+      child: Stack(children: [
+        Container(
+          height: 150,
+          width: screen.width * 0.99,
           decoration: BoxDecoration(
-            color: Colors.pinkAccent,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                catrgory,
-                style: TextStyle(fontSize: 12, color: Colors.white),
-              )
-            ],
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(new_image),
+                fit: BoxFit.cover,
+              )),
+          child: Stack(children: [
+            //Image.asset(new_image, fit: BoxFit.cover),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 14,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                  color: Color.fromARGB(255, 148, 148, 148),
+                                  blurRadius: 1.0)
+                            ]),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 80),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, bottom: 5),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(subtitle,
+                          style: TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 12,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                    color: Color.fromARGB(255, 148, 148, 148),
+                                    blurRadius: 1.0)
+                              ]),
+                          textAlign: TextAlign.end)
+                    ],
+                  ),
+                )
+              ],
+            )
+          ]),
+        ),
+      ]),
+    );
+  }
+
+  Widget category_news(String catrgory, int index) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+      child: ElevatedButton(
+          style: ButtonStyle(
+              shadowColor: MaterialStateProperty.all<Color>(Colors.white),
+              backgroundColor: (index == 0)
+                  ? MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 255, 58, 68))
+                  : MaterialStateProperty.all<Color>(Colors.white),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      side: BorderSide(
+                          color: Color.fromARGB(255, 183, 183, 183),
+                          width: 0.40),
+                      borderRadius: BorderRadius.circular(50.0)))),
+          onPressed: () {},
+          child: Text(
+            catrgory,
+            style: TextStyle(
+                fontSize: 12,
+                color: (index == 0)
+                    ? Colors.white
+                    : Color.fromARGB(255, 65, 47, 41),
+                fontFamily: "Nunito"),
           )),
+    );
+  }
+
+  Widget Nav_bar(var scareen) {
+    return Padding(
+      padding: EdgeInsets.only(left: 10, right: 50, bottom: 12),
+      child: Container(
+        alignment: Alignment.bottomCenter,
+        height: 80,
+        width: scareen.width * 0.75,
+        decoration: BoxDecoration(
+          boxShadow: [BoxShadow(color: Color.fromARGB(255, 161, 161, 161))],
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(90),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              IconButton(
+                icon: Image.asset(
+                  "assets/NavBar/home_icon.png",
+                  height: 40,
+                  width: 40,
+                ),
+                onPressed: () {},
+              ),
+              Text(
+                "Home",
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Color.fromARGB(255, 65, 47, 41),
+                    fontFamily: "Nunito"),
+              )
+            ]),
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              IconButton(
+                icon: Image.asset(
+                  "assets/NavBar/fav_icon.png",
+                  height: 40,
+                  width: 40,
+                ),
+                onPressed: () {},
+              ),
+              Text(
+                "Favorite",
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Color.fromARGB(255, 161, 161, 161),
+                    fontFamily: "Nunito"),
+              )
+            ]),
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              IconButton(
+                icon: Image.asset(
+                  "assets/NavBar/profile_icon.png",
+                  height: 40,
+                  width: 40,
+                ),
+                onPressed: () {},
+              ),
+              Text(
+                "Profile",
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Color.fromARGB(255, 161, 161, 161),
+                    fontFamily: "Nunito"),
+              )
+            ]),
+          ],
+        ),
+      ),
     );
   }
 }
