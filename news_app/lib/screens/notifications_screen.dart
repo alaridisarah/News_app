@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:news_app/screens/home_screen.dart';
+import 'package:news_app/widget/notification_widget.dart';
 
 class notificationscreen extends StatelessWidget {
   const notificationscreen({super.key});
@@ -13,31 +14,26 @@ class notificationscreen extends StatelessWidget {
       appBar: AppBar(
         shadowColor: Colors.white,
         backgroundColor: Colors.white,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => homescreen()),
-                  );
-                },
-                child: Icon(Icons.arrow_back)),
-            SizedBox(
-              width: 100,
+        title: Padding(
+          padding: EdgeInsets.only(left: 70),
+          child: Text(
+            "Hot Updates",
+            style: TextStyle(
+              fontFamily: "Nunito",
+              fontWeight: FontWeight.bold,
+              color: Colors.pinkAccent,
             ),
-            Center(
-              child: Text(
-                  textAlign: TextAlign.center,
-                  "Hot Updates",
-                  style: TextStyle(
-                    fontFamily: "Nunito",
-                    fontWeight: FontWeight.bold,
-                    color: Colors.pinkAccent,
-                  )),
-            ),
-          ],
+            textAlign: TextAlign.center,
+          ),
+        ),
+        leading: InkWell(
+          child: Icon(Icons.arrow_back),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => homescreen()),
+            );
+          },
         ),
       ),
       body: Column(
@@ -79,92 +75,6 @@ class notificationscreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget notification_widget(String image, String date, String title,
-      String first_paragraph, String author, var screen) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 200,
-            width: screen.width * 0.95,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                )),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            date,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.brown,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.normal),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            title,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Tinos",
-                fontWeight: FontWeight.w700,
-                fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          RichText(
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
-            text: TextSpan(
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 13,
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.normal,
-              ),
-              children: [
-                TextSpan(text: first_paragraph),
-                TextSpan(
-                  text: ' Read More',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 13,
-                  ),
-                  // Add an onTap handler to handle the "Read More" action
-                  // onTap: () {
-                  //   // Handle "Read More" action
-                  // },
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 2,
-          ),
-          Text(
-            author,
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: "Nunito",
-              fontWeight: FontWeight.bold,
-            ),
-          )
-        ],
-      )),
     );
   }
 }
