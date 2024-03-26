@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:news_app/global_varible..dart';
+import 'package:news_app/screens/items/newsinfo_screen.dart';
+import 'package:news_app/screens/news_screen.dart';
+import 'package:news_app/screens/notifications_screen.dart';
+import 'package:news_app/screens/search_screen.dart';
 
 import 'items/bottomnav_bar.dart';
 
@@ -12,10 +16,6 @@ class homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      // bottomNavigationBar: bottomnav(
-      // //   index: 0,
-      // // ),
-      // extendBodyBehindAppBar: true,
       body: SafeArea(
         maintainBottomViewPadding: true,
         child: Stack(alignment: AlignmentDirectional.bottomEnd, children: [
@@ -44,7 +44,7 @@ class homescreen extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                         ),
-                        onChanged: (value) {
+                        onTap: () {
                           // Handle text input changes
                         },
                       ),
@@ -52,10 +52,19 @@ class homescreen extends StatelessWidget {
                     SizedBox(
                       width: 15,
                     ),
-                    Image.asset(
-                      "assets/notification_icon.png",
-                      height: 35,
-                      width: 35,
+                    InkWell(
+                      child: Image.asset(
+                        "assets/notification_icon.png",
+                        height: 35,
+                        width: 35,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const notificationscreen()),
+                        );
+                      },
                     )
                   ],
                 ),
@@ -86,7 +95,13 @@ class homescreen extends StatelessWidget {
                                   fontSize: 12,
                                   color: Colors.blue),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => search_screen()),
+                              );
+                            },
                           ),
                           Icon(
                             Icons.arrow_forward_rounded,
@@ -113,17 +128,20 @@ class homescreen extends StatelessWidget {
                         "Crypto investors should be prepared to lose all their money, BOE governor says",
                         "assets/news_image.png",
                         "“I’m going to say this very bluntly again,” he added. “Buy them only if you’re prepared to lose all your money.”",
-                        _screenSize),
+                        _screenSize,
+                        context),
                     Lastnews_summary(
                         "Crypto investors should be prepared to lose all their money, BOE governor says",
                         "assets/news_image.png",
                         "“I’m going to say this very bluntly again,” he added. “Buy them only if you’re prepared to lose all your money.”",
-                        _screenSize),
+                        _screenSize,
+                        context),
                     Lastnews_summary(
                         "Crypto investors should be prepared to lose all their money, BOE governor says",
                         "assets/news_image.png",
                         "“I’m going to say this very bluntly again,” he added. “Buy them only if you’re prepared to lose all your money.”",
-                        _screenSize)
+                        _screenSize,
+                        context)
                   ];
 
                   return articles[index];
@@ -172,37 +190,45 @@ class homescreen extends StatelessWidget {
     );
   }
 
-  Widget Lastnews_summary(
-      String title, String new_image, String subtitle, var screen) {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Container(
-        height: 150,
-        width: screen.width * 0.75,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: AssetImage(new_image),
-              fit: BoxFit.cover,
-            )),
-        child: Stack(children: [
-          //Image.asset(new_image, fit: BoxFit.cover),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 12, color: Colors.white),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(subtitle,
-                  style: TextStyle(fontSize: 8, color: Colors.white),
-                  textAlign: TextAlign.end)
-            ],
-          )
-        ]),
+  Widget Lastnews_summary(String title, String new_image, String subtitle,
+      var screen, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => news_screen()),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Container(
+          height: 150,
+          width: screen.width * 0.75,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(new_image),
+                fit: BoxFit.cover,
+              )),
+          child: Stack(children: [
+            //Image.asset(new_image, fit: BoxFit.cover),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 12, color: Colors.white),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(subtitle,
+                    style: TextStyle(fontSize: 8, color: Colors.white),
+                    textAlign: TextAlign.end)
+              ],
+            )
+          ]),
+        ),
       ),
     );
   }
@@ -261,7 +287,7 @@ class homescreen extends StatelessWidget {
                                     color: Color.fromARGB(255, 148, 148, 148),
                                     blurRadius: 1.0)
                               ]),
-                          textAlign: TextAlign.end)
+                          textAlign: TextAlign.end),
                     ],
                   ),
                 )
