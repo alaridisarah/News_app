@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:news_app/screens/home_screen.dart';
+import 'package:news_app/home/home_screen.dart';
 import 'package:news_app/widget/notification_widget.dart';
 
 class notificationscreen extends StatelessWidget {

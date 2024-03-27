@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:news_app/global_varible..dart';
 import 'package:news_app/widget/Image_container.dart';
 import 'package:news_app/widget/category_buttons.dart';
 import 'package:news_app/widget/newsinfo_screen.dart';
@@ -22,7 +21,6 @@ class search_screen extends StatelessWidget {
             height: 35,
             width: (_screenSize.width * 0.95),
             child: TextFormField(
-              controller: searchWord,
               textAlignVertical: TextAlignVertical.center,
               style: TextStyle(
                 fontFamily: "Nunito",

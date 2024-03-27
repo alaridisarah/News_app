@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:news_app/data/modules/get_news_module.dart';
-import 'package:news_app/global_varible..dart';
 import 'package:news_app/widget/newsinfo_screen.dart';
 import 'package:news_app/screens/news_screen.dart';
 import 'package:news_app/screens/notifications_screen.dart';
@@ -10,7 +9,6 @@ import 'package:news_app/screens/search_screen.dart';
 import 'package:news_app/widget/Image_container.dart';
 import 'package:news_app/widget/Nav_bar.dart';
 import 'package:news_app/widget/category_buttons.dart';
-
 import '../data/repositories/get_news_repo.dart';
 
 class homescreen extends StatefulWidget {
@@ -25,7 +23,6 @@ class _homescreenState extends State<homescreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getUpdates();
   }
@@ -58,7 +55,6 @@ class _homescreenState extends State<homescreen> {
                             height: 35,
                             width: (_screenSize.width * 0.78),
                             child: TextFormField(
-                              controller: searchWord,
                               textAlignVertical: TextAlignVertical.center,
                               style: TextStyle(
                                 fontFamily: "Nunito",
