@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:news_app/data/modules/get_news_module.dart';
 import 'package:news_app/screens/home_screen.dart';
 
 class news_screen extends StatelessWidget {
-  news_screen({super.key});
+  Article? news;
+  news_screen({super.key, this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,10 @@ class news_screen extends StatelessWidget {
           children: [
             Opacity(
                 opacity: 0.9,
-                child: Image.asset(
-                  'assets/news_image.png',
+                child: Image.network(
+                  "${news?.urlToImage}",
                   width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 )),
             Positioned(
               top: 30,
@@ -71,18 +73,10 @@ class news_screen extends StatelessWidget {
                       height: 120,
                     ),
                     RichText(
-                      text: const TextSpan(
+                      text: TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: "LONDON —",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: 'Tinos',
-                                  fontSize: 17,
-                                  color: Color(0xff2E0505))),
-                          TextSpan(
-                              text:
-                                  ' Cryptocurrencies “have no intrinsic value” and people who invest in them should be prepared to lose all their money, Bank of England Governor Andrew Bailey said.',
+                              text: "${news?.content}",
                               style: TextStyle(
                                 color: Color(0xff2E0505),
                                 fontFamily: 'Tinos',
@@ -112,22 +106,33 @@ class news_screen extends StatelessWidget {
                         height: 3,
                       ),
                       Text(
-                        'Sunday, 9 May 2021',
+                        '${news?.publishedAt}',
                         style: TextStyle(
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.normal,
                             fontFamily: 'Nunito',
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 0, 0, 0)),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        '${news?.title}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Tinos',
                             fontSize: 15,
                             color: Color(0xff2E0505)),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Text(
-                        'Published by Ryan Browne',
+                        'Published by ${news?.author}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Nunito',
-                            fontSize: 14,
+                            fontSize: 12,
                             color: Color(0xff2E0505)),
                       )
                     ],

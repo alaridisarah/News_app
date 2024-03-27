@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/data/modules/get_news_module.dart';
 import 'package:news_app/screens/news_screen.dart';
 
 Widget Lastnews_summary(String title, String new_image, String subtitle,
     var screen, BuildContext context) {
   return InkWell(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => news_screen()),
-      );
-    },
+    onTap: () {},
     child: Padding(
       padding: const EdgeInsets.all(2.0),
       child: Container(
@@ -34,6 +30,48 @@ Widget Lastnews_summary(String title, String new_image, String subtitle,
                 height: 5,
               ),
               Text(subtitle,
+                  style: TextStyle(fontSize: 8, color: Colors.white),
+                  textAlign: TextAlign.end)
+            ],
+          )
+        ]),
+      ),
+    ),
+  );
+}
+
+Widget Lastnews_summaryN(Article article, var screen, BuildContext context) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => news_screen(news: article)),
+      );
+    },
+    child: Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Container(
+        height: 150,
+        width: screen.width * 0.75,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: NetworkImage(article.urlToImage.toString()),
+              fit: BoxFit.cover,
+            )),
+        child: Stack(children: [
+          //Image.asset(new_image, fit: BoxFit.cover),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                article.title.toString(),
+                style: TextStyle(fontSize: 12, color: Colors.white),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(article.description.toString(),
                   style: TextStyle(fontSize: 8, color: Colors.white),
                   textAlign: TextAlign.end)
             ],
