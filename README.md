@@ -21,6 +21,8 @@ Clone the repository: `git clone https://github.com/alaridisarah/News_app`
 
 Navigate to the project directory: `cd News_app`
 
+**You need to create an acoount in [news API](https://newsapi.org/) and change the key in lib\data\repositories\get_news_repo.dart to get the latest access.**
+
 Install dependencies: `flutter pub get`
 
 Run the app: `flutter run`
